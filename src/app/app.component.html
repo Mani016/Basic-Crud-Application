@@ -25,12 +25,22 @@
   <h2>Car Price:{{car.price}}</h2>
   <h2>Car Color:{{car.color}}</h2>
 </div>
-<!-- <form [formGroup]="carFormGroup" (ngSubmit)='addCar()'  novalidate >
+<h3>Enter Details to add new element</h3>
+<form [formGroup]="carFormGroup" (ngSubmit)='addCar()'  novalidate >
   <input type="text" formControlName="model" placeholder="Enter Model" />
   <input type="text" formControlName="color" placeholder="Enter Color"  />
   <input type="number" formControlName="price" placeholder="Enter Price" />
   <button>Add Car</button>
-  </form> -->
+  </form>
   <h3>Enter  respective ID to Delete particular CAR </h3>
   <input type="number" [(ngModel)]="idtodelete" placeholder="Enter Id" />
 <button (click)='deleteCar()'>DeleteCar </button>
+<h3>Enter Details to update Existing Element</h3>
+ 
+  <form [formGroup]="carFormGroup"  novalidate >
+      <input type="number" [(ngModel)]="idtoupdate"  [ngModelOptions]="{standalone: true}" placeholder="Enter Id" />
+  <input type="text" formControlName="model" placeholder="Enter Model" />
+  <input type="text" formControlName="color" placeholder="Enter Color"  />
+  <input type="number" formControlName="price" placeholder="Enter Price" />
+  <button (click)='updateCar()'>Update Car</button>
+  </form>

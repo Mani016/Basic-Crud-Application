@@ -10,6 +10,7 @@ import { Car } from './car';
 })
 
 export class AppService {
+ 
   apiurl = 'api/cars';
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
   httpOptions = {
@@ -40,19 +41,28 @@ export class AppService {
       catchError(this.handleError)
     );
   }
-//   addCar (car: Car): Observable<Car> {
-//     return this.http.post<Car>(this.apiurl, car, this.httpOptions).pipe(
-//     tap(data => console.log(data)),
-//     catchError(this.handleError)
-//   );
-// }
+  addCar (car: Car): Observable<Car> {
+    return this.http.post<Car>(this.apiurl, car, this.httpOptions).pipe(
+    tap(data => console.log(data)),
+    catchError(this.handleError)
+  );
+}
 deleteCar (id: number): Observable<Car> {
   const url = `${this.apiurl}/${id}`;
   return this.http.delete<Car>(url, this.httpOptions).pipe(
     catchError(this.handleError)
   );
+  
+
 }
  
+updateCar (car: Car): Observable<null | Car> {
+  return this.http.put<Car>(this.apiurl, car, this.httpOptions).pipe(
+    tap(data => console.log(data)),
+    catchError(this.handleError)
+  );
+}
+
 
 
 

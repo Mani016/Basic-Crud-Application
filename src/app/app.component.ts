@@ -1,7 +1,7 @@
 import { Component,OnInit  } from '@angular/core';
 import { AppService } from './app.service';
 import { Car } from './car';
-import { FormGroup, FormControl } from '@angular/forms';
+import {FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,20 +16,26 @@ export class AppComponent implements OnInit{
   car: Car;
   carToAdd: any;
   carFormGroup: FormGroup;
+  carToUpdate: Car;
  
-    constructor(private appservice: AppService) {
-    //   this.carFormGroup = new FormGroup(
-    //     {
-    //       model: new FormControl(this.carToAdd.model),
-    //       price: new FormControl(this.carToAdd.price),
-    //       color: new FormControl(this.carToAdd.color)
-    //     }
-    //   );
-     
+    constructor(private fb: FormBuilder,private appservice: AppService) {
+      
     }
     ngOnInit() {
       this.getCars();
+      this.createform();
       
+    }
+
+    createform(){
+      this.carFormGroup = this.fb.group(
+        {
+          
+          model: [''],
+          price: [''],
+          color: ['']
+        }
+      );
     }
   
     getCars() {
@@ -44,23 +50,32 @@ export class AppComponent implements OnInit{
       this.car = data;
     });
   }
-  // addCar() {
-  //   this.appservice.addCar(this.carFormGroup.value).subscribe(data => {
-  //     this.car = data;
-  //     console.log(this.car);
-  //   });
-  //   this.getCars();
-  // }
+  addCar() {
+    this.appservice.addCar(this.carFormGroup.value).subscribe(data => {
+      this.car = data;
+      console.log(this.car);
+    });
+    this.getCars();
+  }
   idtodelete=1;
   deleteCar() {
     this.appservice.deleteCar(this.idtodelete).subscribe(data => {
        this.getCars();
     });
   }
- 
+ idtoupdate=1;
+  updateCar() {
+    this.appservice.getCar(this.idtoupdate).subscribe(data => {
+      this.carToUpdate = data;
+      this.carToUpdate.model="updated model";
+      this.appservice.updateCar(this.carToUpdate).subscribe(data1 => {
+      this.getCars();
+      });
+    });
 
  
   
   
   }
+}
 
