@@ -1,0 +1,40 @@
+<table>
+  <tr *ngFor="let c of cars">
+    <td>
+      {{c.id}}
+    </td>
+    <td>
+      {{c.model}}
+    </td>
+    <td>
+      {{c.color}}
+    </td>
+    <td>
+      {{c.price}}
+    </td>
+  </tr>
+</table>
+
+<input type="number" [(ngModel)]="idtofetch" placeholder="Enter Id" />
+<button (click)='getCar()'>Fetch Car </button>
+<div>
+  <h3>Fetched Car with Id : {{idtofetch}}</h3>
+  <h2>Car ID: {{car.id}} </h2>
+ 
+  <h2>Car Model:{{car.model}}</h2>
+  <h2>Car Price:{{car.price}}</h2>
+  <h2>Car Color:{{car.color}}</h2>
+</div>
+<!-- <form [formGroup]="carFormGroup" (ngSubmit)='addCar()'  novalidate >
+  <input type="text" formControlName="model" placeholder="Enter Model" />
+  <input type="text" formControlName="color" placeholder="Enter Color"  />
+  <input type="number" formControlName="price" placeholder="Enter Price" />
+  <button>Add Car</button>
+  </form> -->
+  <h3>Enter  respective ID to Delete particular CAR </h3>
+  <input type="number" [(ngModel)]="idtodelete" placeholder="Enter Id" />
+<button (click)='deleteCar()'>DeleteCar </button>
+
+
+
+  
